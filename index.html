@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Meme Generator</title>
+    <script src="https://kit.fontawesome.com/8d5d8553d4.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body onload="init()">
+
+    <header class="main-header">
+        <div class="container flex space-between align-center">
+            <div class="logo">meme generator</div>
+            <ul class="main-nav clean-list flex">
+                <li class="nav-item"><a onclick="onToggleGallery()">Gallery</a></li>
+                <li class="nav-item"><a>Memes</a></li>
+                <li class="nav-item"><a>About</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="img-container">
+        <div class="gallery"></div>
+    </section>
+    <canvas id="myCanvas" height="500" width="500"></canvas>
+    <div class="Edit-Meme">
+        <input type="text" class="line-edit" placeholder="Add text" onkeyup="onWrite(this)" onkeypress="onWrite(this)" />
+        <button label="right" onclick="editTextLine('right')" class="btn-changes ">right</button>
+        <button label="left" onclick="editTextLine('left')" class="btn-changes ">left</button>
+        <button label="-" onclick="editTextLine('-')" class="btn-changest"><i class="fab fa fa-text-height"></i>-</button>
+        <button label="+" onclick="editTextLine('+')" class="btn-changes"><i class="fab fa fa-text-height"></i>+</button>
+        <button label="up" onclick="editTextLine('up')" class="btn-changes"><i class="fab fa fa-arrow-up"></i></button>
+        <button label="down" onclick="editTextLine('down')" class="btn-changes"><i class="fab fa fa-arrow-down"></i></button>
+        <button onclick="onRemoveText()" class="btn-changes"><i class="fab fa fa-trash-alt"></i></button>
+    </div>
+
+    <!-- <i class="fab fa fa-plus"></i> -->
+    <!-- <i class="fab fa fa-sort"></i> -->
+    <!-- <section class="user-changes">
+        <h1>Playing with Shapes</h1>
+        <button class="btn-changes" onclick="draw('rect')">Rectangle</button>
+        <button class="btn-changes" onclick="draw('circle')">Circle</button>
+        <button class="btn-changes" onclick="setShape('line')">Line</button>
+        <button class="btn-changes" onclick="clearCanvas()">Clear</button>
+        <label for="changeBgColor" class="color">
+        <input class="btn-changes" type="color" onchange="onChangeBgColor(this.value)" name="changeBgColor" /></label>
+        <label for="changeStColor" class="color">
+        <input class="btn-changes" type="color" onchange="onChangeColor(this.value)" name="changeStColor" /></label>
+
+        <button class="btn-changes"><a href="#"  onclick="downloadCanvas(this)" download="">Download</a></button>
+    </section>
+    <!-- onmouseout="stopDraw()" onmouseup="stopDraw()" onmousedown="startDraw()" onmousemove="drawSomething(event)" -->
+
+
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+    <script src="js/canvas-controller.js"></script>
+</body>
+
+</html>

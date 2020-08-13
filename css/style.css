@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+}
+
+
+/**** BASE ****/
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #fffdee;
+    border-right: 2px solid #fdf7be;
+    border-left: 2px solid #fdf7be;
+}
+
+p {
+    margin: 0 0 1rem;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    background: #ffffff;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+
+/**** Fonts ****/
+
+@font-face {
+    font-family: Lato-Regular;
+    src: url(../fonts/lato/Lato-Regular.ttf);
+}
+
+@font-face {
+    font-family: Lato-Bold;
+    src: url(../fonts/lato/Lato-Bold.ttf);
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url(../fonts/Poppins/Poppins-Medium.ttf);
+}
+
+.main-header {
+    background-color: #292929;
+}
+
+.main-header .logo {
+    font-family: Poppins;
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: #ffffff;
+    height: 80px;
+    padding-top: 20px;
+}
+
+.main-header li {
+    background-color: #292929;
+    border-left: 1px solid #1e1e1e;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.main-header li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: Lato-Bold;
+    text-transform: capitalize;
+    width: 80px;
+    height: 80px;
+}
+
+
+/* button {
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #c7c5c5;
+    border-radius: 0;
+    text-align: center;
+    font-family: Lato-Regular;
+    font-size: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+} */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    grid-template-rows: 100px;
+    grid-gap: 10px;
+    text-align: center;
+}
+
+.img-container {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.canvas-container {
+    background-color: #ffeecb;
+    margin: 0 auto;
+    width: 90vw;
+    height: 90vh;
+    border: 12px solid rgb(21, 105, 126);
+}
+
+.user-changes {
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+    font-family: Lato-Regular;
+    font-size: 1rem;
+}
+
+
+/**** Flex Helpers ****/
+
+.flex {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.stretch {
+    align-content: stretch;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.align-center {
+    align-items: center;
+}
