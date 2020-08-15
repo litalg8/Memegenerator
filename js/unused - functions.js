@@ -88,6 +88,29 @@ notes...
 // }
 
 
+// var gMeme = {
+//     selectedImgId: 1,
+//     selectedLineIdx: 0,
+//     lines: [{
+//             txt: 'Line Text 1',
+//             size: 42,
+//             align: 'center',
+//             color: gColor,
+//             top: 100,
+//             left: 250
+//         },
+//         {
+//             txt: 'Line Text 2',
+//             size: 42,
+//             align: 'center',
+//             color: gColor,
+//             top: 400,
+//             left: 250
+//         },
+
+//     ]
+// }
+
 
 
 
@@ -191,31 +214,7 @@ notes...
 //         gKeyWords.push({ word: keyword, search: 0 })
 //     })
 // }
-// function addLine() {
-//     gMeme.selectedLineIdx = gMeme.lines.length;
-//     var userPos;
-//     if (gMeme.selectedLineIdx === 0) userPos = USER_POS;
-//     else if (gMeme.selectedLineIdx === 1) userPos = gCanvas.height - USER_POS;
-//     else userPos = USER_POS * gMeme.selectedLineIdx;
-//     var line = {
-//             id: gMeme.lines.length,
-//             txt: '',
-//             size: 42,
-//             align: 'center',
-//             color: gColor,
-//             pos: pos,
-//             x: 0,
-//             y: 0,
-//         }
-//         // line.startY = line.pos + line.size / 2;
-//         // line.endY = line.pos + line.size / 2;
-//     if (gMeme.lines.length === 0) {
-//         gMeme.lines[0] = line;
-//     }
-//     console.log(line.x);
-//     console.log(line.y);
-//     gMeme.lines.push(line);
-// }
+
 
 
 // Add : switch between lines
@@ -264,3 +263,201 @@ notes...
 // function getMeme(imgId) {
 //     createMeme(imgId);
 // }
+
+
+
+// var memeText = meme.lines[idx].txt;
+// var fontSize = meme.lines[idx].size;
+// var txtAlign = meme.lines[idx].align;
+// var txtColor = meme.lines[idx].color;
+// var font = getFont();
+
+// gCtx.font = `${fontSize}px ${font}`;
+
+// function drawImg() {
+//     const img = new Image();
+//     img.src = getImgByUrl();
+//     const lines = getLines();
+//     img.onload = () => {
+
+//         getMemeLines()
+// lines.forEach(line => {
+//         gCtx.beginPath();
+//         drawText(gMeme.lines.txt, 225, 225)
+
+// })
+// let line = getSelectedLine();
+// if(line && line.txt){
+//     let txtWidth =gCtx.measureText(line.txt).width; 
+
+// }
+// drawText();
+// getMemeLines()
+//     }
+
+// }
+
+
+
+// function changeTxtLine() {
+//     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+//     drawMeme()
+// }
+
+
+
+// function getLines() {
+//     return gMeme.lines;
+// }
+
+
+// function getNewLine() {
+//     if (gMeme.lines.length && gMeme.selectedLineIdx !== -1) return gMeme.lines[gMeme.selectedLineIdx];
+//     return null;
+// }
+
+// function addLine() {
+//     gMeme.lines.push(createLine('this is a line'));
+//     gMeme.selectedLineIdx = gMeme.lines.length - 1;
+// }
+
+
+// function createLine(txt = 'enter new line here', size = 42, align = 'center', color = gColor, top = "100", left = "250") {
+//     return {
+//         txt,
+//         size,
+//         align,
+//         color,
+//         top,
+//         left
+//     }
+// }
+
+
+// var gColor = 'white';
+// var gFontFamily = 'impact';
+
+
+// function setMemeId(id) {
+//     gMeme.selectedImgId = id;
+// }
+
+
+// function getMemeLines() {
+//     gMeme.lines.forEach((line, idx) => {
+//         drawText(idx, line.left, line.top)
+//     });
+// }
+
+
+// function onChooseImg(elMeme) {
+// var memeId = +elMeme.dataset.id;
+// setMeme(memeId)
+// document.querySelector('.gallery').hidden = !document.querySelector('.gallery').hidden;
+// document.querySelector('.line-edit').hidden = !document.querySelector('.line-edit').hidden;
+// drawCanvas();
+
+// }
+
+
+
+// var numOfLines = gMeme.lines.length;
+// var canvasHeight = gCanvas.height;
+// var canvasWidth = gCanvas.width;
+// var newFirstLine;
+// if (numOfLines === 0) {
+//     newFirstLine.Math.round(canvasHeight * 0.2);
+// } else if (numOfLines === 1) {
+//     newFirstLine.Math.round(canvasHeight * 0.8)
+// } else {
+//     newFirstLine.Math.round(canvasHeight / 2)
+
+// var gMeme = getMeme();
+// if (gMeme.lines.length === 1) return false;
+// gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+// var newLine = gMeme.selectedLineIdx - 1
+// if (newLine < 0) newLine = 0;
+// return newLine;
+
+
+// <!-- <i class="fab fa fa-plus"></i> -->
+// <!-- <i class="fab fa fa-sort"></i> -->
+// <!-- <section class="user-changes">
+//     <h1>Playing with Shapes</h1>
+//     <button class="btn-changes" onclick="draw('rect')">Rectangle</button>
+//     <button class="btn-changes" onclick="draw('circle')">Circle</button>
+//     <button class="btn-changes" onclick="setShape('line')">Line</button>
+//     <button class="btn-changes" onclick="clearCanvas()">Clear</button>
+//     <label for="changeBgColor" class="color">
+//     <input class="btn-changes" type="color" onchange="onChangeBgColor(this.value)" name="changeBgColor" /></label>
+//     <label for="changeStColor" class="color">
+//     <input class="btn-changes" type="color" onchange="onChangeColor(this.value)" name="changeStColor" /></label>
+
+//     <button class="btn-changes"><a href="#"  onclick="downloadCanvas(this)" download="">Download</a></button>
+// </section>
+// <!-- onmouseout="stopDraw()" onmouseup="stopDraw()" onmousedown="startDraw()" onmousemove="drawSomething(event)" -->
+
+
+
+/* button {
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid #c7c5c5;
+    border-radius: 0;
+    text-align: center;
+    font-family: Lato-Regular;
+    font-size: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+} */
+
+
+//  background-color: #ffeecb;
+//     width: 60%;
+//     height: 90vh;
+//     margin-right: 40px; 
+
+
+/* align-self: flex-start; */
+
+
+/* margin-right: 30px; */
+
+/* grid-template-columns: repeat(3, 300px);
+grid-template-rows: 300px; */
+/* grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(3, 5vw);
+grid-gap: 15px; */
+
+
+/* grid-gap: 10px; */
+
+/* height: 100%; */
+
+/* 
+.canvas-container .border {
+    position: absolute;
+} */
+
+
+/* .user-changes {
+    margin: 0 auto;
+    width: 60%;
+    text-align: center;
+    font-family: Lato-Regular;
+    font-size: 1rem;
+} */
+
+
+/* grid-template-columns: repeat(12, 1fr); */
+/* grid-template-rows: repeat(1, 1fr); */
+/* grid-auto-flow: dense; */
+/* display: none; */
+/* flex-direction: row;
+justify-content: space-around; */
+/* max-width: 500px; */
+/* height: 500px; */

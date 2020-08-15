@@ -17,49 +17,93 @@
         <div class="container flex space-between align-center">
             <div class="logo">meme generator</div>
             <ul class="main-nav clean-list flex">
-                <li class="nav-item"><a onclick="onToggleGallery()">Gallery</a></li>
-                <li class="nav-item"><a>Memes</a></li>
-                <li class="nav-item"><a>About</a></li>
+                <li class="nav-item"><a onclick="onCloseEditor(this)">Gallery</a></li>
+                <li class="nav-item"><a onclick="onCloseEditor(this)">Memes</a></li>
+                <li class="nav-item"><a onclick="onCloseEditor(this)">About</a></li>
             </ul>
         </div>
     </header>
-
-    <section class="img-container">
-        <div class="gallery"></div>
+    <section class="search-bar">
+        <div class="search container flex ">
+            <input type="text" placeholder="Search for images to convert🔎" class="search-line" />
+        </div>
     </section>
-    <canvas id="myCanvas" height="500" width="500"></canvas>
-    <div class="Edit-Meme">
-        <input type="text" class="line-edit" placeholder="Add text" onkeyup="onWrite(this)" onkeypress="onWrite(this)" />
-        <button label="right" onclick="editTextLine('right')" class="btn-changes ">right</button>
-        <button label="left" onclick="editTextLine('left')" class="btn-changes ">left</button>
-        <button label="-" onclick="editTextLine('-')" class="btn-changest"><i class="fab fa fa-text-height"></i>-</button>
-        <button label="+" onclick="editTextLine('+')" class="btn-changes"><i class="fab fa fa-text-height"></i>+</button>
-        <button label="up" onclick="editTextLine('up')" class="btn-changes"><i class="fab fa fa-arrow-up"></i></button>
-        <button label="down" onclick="editTextLine('down')" class="btn-changes"><i class="fab fa fa-arrow-down"></i></button>
-        <button onclick="onRemoveText()" class="btn-changes"><i class="fab fa fa-trash-alt"></i></button>
-    </div>
-
-    <!-- <i class="fab fa fa-plus"></i> -->
-    <!-- <i class="fab fa fa-sort"></i> -->
-    <!-- <section class="user-changes">
-        <h1>Playing with Shapes</h1>
-        <button class="btn-changes" onclick="draw('rect')">Rectangle</button>
-        <button class="btn-changes" onclick="draw('circle')">Circle</button>
-        <button class="btn-changes" onclick="setShape('line')">Line</button>
-        <button class="btn-changes" onclick="clearCanvas()">Clear</button>
-        <label for="changeBgColor" class="color">
-        <input class="btn-changes" type="color" onchange="onChangeBgColor(this.value)" name="changeBgColor" /></label>
-        <label for="changeStColor" class="color">
-        <input class="btn-changes" type="color" onchange="onChangeColor(this.value)" name="changeStColor" /></label>
-
-        <button class="btn-changes"><a href="#"  onclick="downloadCanvas(this)" download="">Download</a></button>
-    </section>
-    <!-- onmouseout="stopDraw()" onmouseup="stopDraw()" onmousedown="startDraw()" onmousemove="drawSomething(event)" -->
+    <main class="main-content image-container">
 
 
-    <script src="js/meme-service.js"></script>
+        <div class="meme-editor container margin-top" hidden>
+            <div class="canvas-container">
+                <canvas id="myCanvas" height="500" width="500" crossorigin="anonymous" onmousedown="onDragEl(event)" onmousemove="onMoveEl(event)" onmouseup="onPlaceEl(event)"></canvas>
+                <div class="border"></div>
+            </div>
+            <div class="control-box">
+                <div class="line-editor">
+                    <input type="text" class="line-edit" id="first-line" placeholder="Add your text" onkeyup="onWrite(this)" onkeypress="onWrite(this)" />
+                </div>
+                <div class="control-edit-container margin-top">
+                    <button label="-" onclick="onSwitchLine()" class="btn-changes"><span class="sort icon">&#8645;</span></button>
+                    <button onclick="onAddLine()" class="btn-changes"><i class="fab fa fa-plus"></i></button>
+                    <button onclick="onRemoveLine()" class="btn-changes"><i class="fab fa fa-trash-alt"></i></button>
+                </div>
+                <div class="position-edit-container margin-top">
+                    <button label="right" onclick="editTextLine('right')" class="btn-changes "><i class="fas fa-long-arrow-alt-right"></i></button>
+                    <button label="left" onclick="editTextLine('left')" class="btn-changes "><i class="fas fa-long-arrow-alt-left"></i></button>
+                    <button label="up" onclick="editTextLine('up')" class="btn-changes"><i class="fab fa fa-arrow-up"></i></button>
+                    <button label="down" onclick="editTextLine('down')" class="btn-changes"><i class="fab fa fa-arrow-down"></i></button>
+                </div>
+                <div class="align-edit-container margin-top">
+                    <button label="-" onclick="editTextLine('-')" class="btn-changes"><i class="fab fa fa-font fa-lg"></i>-</button>
+                    <button label="+" onclick="editTextLine('+')" class="btn-changes"><i class="fab fa fa-font fa-lg"></i>+</button>
+                    <button label="align-right" onclick="editTextLine('align-right')" class="btn-changes"><i class="fab fa fa-align-left"></i></button>
+                    <button label="align-center" onclick="editTextLine('align-center')" class="btn-changes"><i class="fab fa fa-align-center"></i></button>
+                    <button label="align-left" onclick="editTextLine('align-left')" class="btn-changes"><i class="fab fa fa-align-right"></i></button>
+                </div>
+                <div class="font-edit-container margin-top">
+                    <select class="font-select" onchange="onChangeFont(this.value)">
+                                 <option value="impact" class="font-choice">Impact</option>
+                                <option value="monospace" class="font-choice">Monospace</option>
+                                <option value="Arial" class="font-choice">Arial</option>
+                                <option value="Open_Sans" class="font-choice">Open-sans</option>
+                                <option value="Sriracha" class="font-choice">Sriracha</option>
+                        </select>
+                    <button class="btn-changes">
+                        <label for="font-color"><i class="fas fa-palette"></i></label>
+                        <input type="color" id="font-color" onchange="onChangeColor(this.value)" hidden>
+                            <!-- <button class="btn-changes color"></button> -->
+                    </button>
+                </div>
+                <div class="finish-edit-container margin-top">
+                    <button class="btn-changes" onmousedown="onHideMark()"><a href="#" onclick="onDownloadMeme(this)" download="my-meme.jpg"><i class="fab fa fa-download fa-lg"></i></a></button>
+                    <button onclick="onSaveMeme()" class="btn-changes">save</button>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-container margin-top">
+            <div class="gallery"></div>
+        </div>
+        <footer class="main-footer">
+            <div class="footer container">
+                <div class="creator-container">
+                    <!-- <img src="me.png" /> -->
+                </div>
+                <nav class="social-container">
+                    <button class="social-facebook"></button>
+                    <button class="social-facebook"></button>
+                    <button class="social-facebook"></button>
+                </nav>
+            </div>
+
+
+        </footer>
+
+
+    </main>
+
+
+    <script src="js/storage-service.js"></script>
     <script src="js/meme-controller.js"></script>
-    <script src="js/canvas-controller.js"></script>
+    <script src="js/meme-service.js"></script>
+    <!-- <script src="js/canvas-controller.js"></script> -->
 </body>
 
 </html>
