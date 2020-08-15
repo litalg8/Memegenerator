@@ -90,7 +90,7 @@ function createMeme(imgId) {
         selectedLineIdx: 0,
         lines: []
     }
-    addLine('Text', 200, 70)
+    addLine('Your text goes here', 250, 100)
 }
 
 
