@@ -16,6 +16,7 @@ body {
 }
 
 canvas {
+    width: 100%;
     background-color: #f3f3f3;
     margin: 0;
 }
@@ -116,14 +117,16 @@ img {
     cursor: pointer;
 }
 
-#myCanvas {
+#my-canvas {
     border: 7px solid rgb(194, 191, 191);
 }
 
 .canvas-container {
-    height: 100%;
+    /* height: 100%; */
+    width: 30rem;
+    height: 30rem;
     margin: 0 auto;
-    grid-column: 1/5;
+    /* grid-column: 1/5; */
 }
 
 .download-btn a {
@@ -177,27 +180,31 @@ img {
 /**** Meme-editor ****/
 
 .meme-editor {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-flow: dense;
-    align-items: center;
+    width: 100%;
+    align-content: space-between;
+    /* display: grid;
+
+/* align-items: center; */
     background-color: rgb(240, 240, 240);
 }
 
 .control-box {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: #c3dada;
     text-align: center;
     padding: 10px;
     padding-top: 20px;
-    grid-column: 6/13;
-    margin-right: 30px;
+    width: 40%;
+    margin: 0 auto;
+    /* grid-column: 6/13;
+
+/* height: 80%; */
 }
 
 .my-img {
-    width: 100px;
+    width: 200px;
     border-radius: 120px;
     outline: none;
 }
@@ -234,13 +241,10 @@ img {
     height: calc(1.5em + .75rem - 2px);
     padding: .375rem .75rem;
     font-size: 1.5em;
-    /* font-weight: 400;
-    line-height: 1.5; */
-    background-color: #292929;
-    color: #c3dada;
+    background-color: #99d6d6;
+    color: #292929;
     background-clip: padding-box;
     border: 1px solid #ced4da;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
 .line-edit {
@@ -257,22 +261,20 @@ img {
     color: #292929;
 }
 
-.social-container .social {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
+.social-container {
+    margin: 0 auto;
+    height: 300px;
 }
 
 .social-footer {
     justify-content: center;
-    width: 100%;
+    width: 30%;
 }
 
 .main-footer {
     color: #ffffff;
-    height: 300px;
     background-color: #292929;
-    text-align: center;
+    text-align: left;
     margin: 0 auto;
 }
 
@@ -281,6 +283,12 @@ img {
     width: 100%;
     padding: 1rem;
     color: #292929;
+}
+
+.my-info h3 {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -376,7 +384,11 @@ img {
 
 @media (max-width: 940px) {
     .container {
-        max-width: 740px;
+        max-width: 800px;
+    }
+    .canvas-container #my-canvas img {
+        width: 20rem;
+        height: 20rem;
     }
     html {
         font-size: 14px;
@@ -386,11 +398,31 @@ img {
         align-content: space-around;
         font-size: 1.5rem;
     }
-    .canvas-container>* {
-        flex: 0 0 100%;
+    .control-box {
+        width: 101%;
+    }
+    .meme-editor {
+        flex-direction: column;
+        width: 50%;
     }
     .main-header .logo {
         margin-inline-end: 20px;
+    }
+    .social-container {
+        text-align: center;
+        height: 300px;
+        flex-direction: column;
+    }
+    .my-img {
+        width: 150px;
+        border-radius: 120px;
+        outline: none;
+        display: inline-block;
+    }
+    .my-info h3 {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
     }
 }
 
@@ -401,18 +433,22 @@ img {
 }
 
 @media (max-width: 740px) {
+    html {
+        font-size: 12px;
+    }
     .container {
-        max-width: 550px;
+        max-width: 400px;
+    }
+    .canvas-container {
+        width: 20rem;
+        height: 20rem;
+    }
+    .control-box {
+        width: 100%;
     }
     .meme-editor {
-        display: initial;
-    }
-    .meme-aditor {
-        grid-auto-flow: column;
-    }
-    .meme-aditor>div {
-        width: 60%;
-        font-size: 0.5rem;
+        flex-direction: column;
+        width: 100%;
     }
     .search-line {
         padding: 0.8rem;
@@ -423,9 +459,11 @@ img {
     .search-bar .search-line {
         width: 250px;
     }
-    .canvas-container {
-        min-width: 40%;
-        min-height: 40%;
+    .main-nav li:not(:first-child) {
+        margin-inline-start: 0;
+    }
+    body.menu-open .main-nav {
+        transform: translateY(100px);
     }
     nav {
         padding-left: 2em;
@@ -445,12 +483,6 @@ img {
         /* max-height: 100vh; */
         /* transform: translateX(0%); */
         transition: all .8s;
-    }
-    .main-nav li:not(:first-child) {
-        margin-inline-start: 0;
-    }
-    body.menu-open .main-nav {
-        transform: translateY(100px);
     }
     .main-nav li a {
         width: 100vw;

@@ -39,7 +39,7 @@
 
         <div class="meme-editor container margin-top">
             <div class="canvas-container">
-                <canvas id="myCanvas" height="500" width="500" crossorigin="anonymous" onmousedown="onDragEl(event)" onmousemove="onMoveEl(event)" onmouseup="onPlaceEl(event)"></canvas>
+                <canvas id="my-canvas" height="500" width="500" crossorigin="anonymous" onmousemove="onMoveEl(event)" onmousedown="onDragEl(event)" onmouseup="onPlaceEl(event)"></canvas>
                 <div class="border"></div>
             </div>
             <div class="control-box">
@@ -60,9 +60,9 @@
                 <div class="align-edit-container margin-top">
                     <button label="-" onclick="editTextLine('-')" class="btn-changes"><i class="fab fa fa-font fa-lg"></i>-</button>
                     <button label="+" onclick="editTextLine('+')" class="btn-changes"><i class="fab fa fa-font fa-lg"></i>+</button>
-                    <button label="align-right" onclick="editTextLine('align-right')" class="btn-changes"><i class="fab fa fa-align-left"></i></button>
+                    <button label="align-left" onclick="editTextLine('align-left')" class="btn-changes"><i class="fab fa fa-align-left"></i></button>
                     <button label="align-center" onclick="editTextLine('align-center')" class="btn-changes"><i class="fab fa fa-align-center"></i></button>
-                    <button label="align-left" onclick="editTextLine('align-left')" class="btn-changes"><i class="fab fa fa-align-right"></i></button>
+                    <button label="align-right" onclick="editTextLine('align-right')" class="btn-changes"><i class="fab fa fa-align-right"></i></button>
                 </div>
                 <div class="font-edit-container margin-top">
                     <select class="font-select" onchange="onChangeFont(this.value)">
@@ -79,7 +79,7 @@
                     </button>
                 </div>
                 <div class="finish-edit-container margin-top">
-                    <button class="btn-changes download-btn" onclick="onDownloadMeme(this)" onmousedown="onHideMark()"><a href="#" onclick="onDownloadMeme(this)" download="my-meme.jpg"><i class="fab fa fa-download fa-lg"></i></a></button>
+                    <button class="btn-changes download-btn" onclick="onDownloadMeme(this)" onmousedown="clearMark()"><a href="#" onclick="onDownloadMeme(this)" download="my-meme.jpg"><i class="fab fa fa-download fa-lg"></i></a></button>
                     <button onclick="onSaveMeme()" class="btn-changes">save</button>
                 </div>
             </div>
@@ -88,17 +88,15 @@
             <div class="gallery"></div>
         </div>
         <footer class="main-footer margin-top ">
-            <img class="my-img margin-top" src="img/me.jpg" />
-            <nav class="social-container container">
-
-
-                <div class="my-info ">
+            <nav class="social-container container flex align-center space-between">
+                <img class="my-img margin-top" src="img/me.jpg" />
+                <div class="my-info flex column ">
                     <h3>Lital Gottlieb</h3>
                     <p>Hey! You got all the way here to read about me..
                     </p>
                 </div>
 
-                <ul class="social-footer clean-list container flex align-center">
+                <ul class="social-footer clean-list flex align-center">
                     <li class="social-facebook">
                         <a href="https://www.facebook.com/lital.gottlieb" target="_blank">
                             <div class="fab fa-facebook-f"></div>
@@ -121,26 +119,13 @@
             </div>
 
         </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
     </main>
 
-
     <script src="js/storage-service.js"></script>
+    <!-- <script src="js/canvas-controller.js"></script> -->
     <script src="js/meme-controller.js"></script>
     <script src="js/meme-service.js"></script>
-    <!-- <script src="js/canvas-controller.js"></script> -->
+
 </body>
 
 </html>

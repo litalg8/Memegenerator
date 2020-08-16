@@ -37,15 +37,20 @@ function getLineById() {
     return gMeme.lines[gMeme.length - 1]
 }
 
-// function getLines() {
-//     return gMeme.lines;
-// }
 
 
 function setLineIdx(idx) {
     gMeme.selectedLineIdx = idx;
 }
 
+function setLinePos(line, xPos, yPos) {
+    line.x = xPos;
+    line.y = yPos;
+}
+
+function getLines() {
+    return gMeme.lines;
+}
 
 function getMeme() {
     // console.log('gMeme', gMeme)
@@ -80,6 +85,13 @@ function setMemeTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
+function switchLines() {
+    if (!getLines().length) return;
+    gMeme.selectedLineIdx += 1;
+    if (gMeme.selectedLineIdx >= gMeme.lines.length) {
+        gMeme.selectedLineIdx = 0;
+    }
+}
 
 ////CREATE functions 
 
@@ -120,17 +132,22 @@ function setLineChanges(val) {
             break;
         case 'align-center':
             gMeme.lines[gMeme.selectedLineIdx].align = 'center';
+            gMeme.lines[gMeme.selectedLineIdx].x = gCanvas.width / 2;
             break;
         case 'align-left':
             gMeme.lines[gMeme.selectedLineIdx].align = 'left';
+            gMeme.lines[gMeme.selectedLineIdx].x = 10;
             break;
         case 'align-right':
             gMeme.lines[gMeme.selectedLineIdx].align = 'right';
+            gMeme.lines[gMeme.selectedLineIdx].x = gCanvas.width - 10;
             break;
     }
 }
 
+function setLineAlign() {
 
+}
 
 function createImages() {
     var gImgs = [];
@@ -198,78 +215,3 @@ function saveMemesToStorage() {
     saveMemesToStorage(MEME_KEY, gMemes)
 
 }
-
-// function getLineCoords(xcoord, ycoord, width, align, size) {
-//     let x;
-//     switch (align) {
-//         case 'center':
-//             x = xcoord - (width / 2);
-//             break;
-//         case 'left':
-//             x = xcoord;
-//             break;
-//         case 'right':
-//             x = (xcoord - width);
-//     }
-//     let y = ycoord - size;
-//     return { xcoord: x, ycoord: y, xcoord2: (x + width), ycoord2: (y + size) }
-// }
-
-// function setGalleryFilter(str) {
-//     if (!str) gFilter = undefined;
-//     else gFilter = str;
-// }
-
-
-// function getKeyWords() {
-//     gKeyWords = {};
-//     const imgs = getFilteredImgs();
-//     imgs.forEach(img => {
-//         img.keywords.forEach(keyword => {
-//             gKeyWords[keyword] = gKeyWords[keyword] ? ++gKeyWords[keyword] : 1;
-//         })
-//     })
-// }
-
-// function getFilteredImgs(imgId) {
-//     if (imgId) {
-//         let idx = getImageById(imgId);
-//         return gGallery[idx];
-//     }
-//     if (!gFilter) return gGallery;
-//     else {
-//         var filteredImgs = gGallery.filter(img => {
-//             return img.keywords.filter(keyword => {
-//                 return keyword.includes(gFilter)
-//             })
-//         })
-//         return filteredImgs;
-
-//     }
-// function markLine() {
-//     var meme = getMeme();
-//     var markedLine = meme.selectedLineIdx;
-//     gCurrLine = meme.lines[markedLine];
-//     var lineWidth = gCtx.measureText(gCurrLine.txt).width;
-//     var lineHeight = gCurrLine.size;
-//     let x;
-//     switch (gCurrLine.align) {
-//         case 'center':
-//             x = gCurrLine.x - (lineWidth / 2);
-//             break;
-//         case 'left':
-//             x = gCurrLine.x;
-//             break;
-//         case 'right':
-//             x = gCurrLine.x - lineWidth;
-//             break;
-//     }
-//     let y = gCurrLine.y - (0.9 * lineHeight)
-//     drawRect(x, y, lineWidth, lineHeight)
-
-// }
-
-// function _saveBooks() {
-//     saveToStorage('books', gBooks)
-// }   saveToStorage('books', gBooks)
-// }
