@@ -150,6 +150,10 @@ img {
     object-position: 50% 50%;
 }
 
+.nav-item a {
+    transition: 2s;
+}
+
 
 /** search bar **/
 

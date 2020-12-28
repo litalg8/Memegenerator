@@ -1,12 +1,14 @@
 'use strict';
 var gCanvas = document.getElementById('my-canvas');
-// var gDrag = 'up';
-// console.log(gCanvas, 'type anywhere on the screen and it kinda works')
-var gCtx = gCanvas.getContext('2d');
-// resizeCanvas();
-var gIsDrag = false;
-var gSelectedLine = false;
 
+// console.log(gCanvas, 'type anywhere on the screen and it kinda works')
+// CR: run in init
+// var gLineIdx; 
+var gCtx;
+var gIsDrag = false;
+var BoundingBox = gCanvas.getBoundingClientRect();
+var gSelectedLine = false;
+// CR:  gIsMark 
 
 
 
@@ -15,19 +17,18 @@ function init() {
     document.querySelector('.meme-editor').style.display = 'none';
     var images = getImageById();
     renderImages(images)
-        // gCanvas.addEventListener("touchstart", onDragEl);
-        // gCanvas.addEventListener("touchmove", onMoveEl);
-        // gCanvas.addEventListener("touchend", onPlaceEl);
+    gCtx = gCanvas.getContext('2d');
+    // gCanvas.addEventListener("touchstart", onDragEl);
+    // gCanvas.addEventListener("touchmove", onMoveEl);
+    // gCanvas.addEventListener("touchend", onPlaceEl);
 
 }
 
-function openMemeEditor(imgId, elImg) {
+function openMemeEditor(imgId) {
     document.querySelector('.meme-editor').style.display = 'flex';
     document.querySelector('.gallery').style.display = 'none';
     createMeme(imgId);
-    // resizeCanvasByImg(elImg);
     drawCanvas();
-
 }
 
 
@@ -57,6 +58,7 @@ function onAddLine() {
     if (meme.lines.length === 1) y = (gCanvas.height - 100);
     if (meme.lines.length >= 2) y = (gCanvas.height / 2);
     addLine('This is another line', x, y)
+// gHeight += 50 
     document.querySelector('.line-edit').value = '';
     drawText(meme.lines[meme.lines.length - 1]);
     drawCanvas();
@@ -83,9 +85,7 @@ function onSwitchLine() {
     drawCanvas();
 }
 
-
-
-function editTextLine(elBtn) {
+function onTextEdit(elBtn) {
     setLineChanges(elBtn);
     drawCanvas();
 }
@@ -165,11 +165,13 @@ function renderImages() {
 
 
 
-function onDragEl(ev) {
+function onMouseMove(ev) {
+    ev.preventDefault()
+    ev.stopPropagation();
     const { offsetX, offsetY } = ev;
     var meme = getMeme();
     gIsDrag = true;
-    meme.lines.forEach((line, idx) => {
+    meme.lines.forEach((line) => {
         let lineWidth = gCtx.measureText(line.txt).width;
         let lineHeight = line.size;
         if (offsetX >= line.x - (lineWidth / 2) &&
@@ -177,12 +179,9 @@ function onDragEl(ev) {
             offsetY >= line.y - (lineHeight) &&
             offsetY <= line.y) {
             gSelectedLine = true;
-            setLineIdx(idx);
-            console.log('if', meme.selectedLineIdx)
-                // markLine();
+            getLineIdx(offsetX, offsetY);
             document.querySelector('.line-edit').value = line.txt;
         } else {
-            console.log('else', meme.selectedLineIdx)
             gSelectedLine = false;
         }
     })
@@ -190,28 +189,26 @@ function onDragEl(ev) {
 }
 
 
-// if (offsetX >= line.x - (lineWidth / 2) &&
-// offsetX <= line.x + (lineWidth / 2) &&
-// offsetY >= line.y - (lineHeight) &&
-// offsetY <= line.y) {
 
-function onMoveEl(ev) {
-    // var elCanvas = document.querySelector('canvas')
+function onMouseDown(ev) {
+    ev.preventDefault()
     if (!gIsDrag && !gSelectedLine) return;
     const { offsetX, offsetY } = ev;
+    // gLineIdx = getLineIdx(offsetX, offsetY)
     const { movementX, movementY } = ev;
     let linePosX = offsetX + movementX;
     let linePosY = offsetY + movementY;
     var meme = getMeme();
     if (gSelectedLine) {
-        setLinePos(meme.lines[meme.selectedLineIdx], linePosX, linePosY)
+        getLineIdx(meme.lines[meme.selectedLineIdx], linePosX, linePosY)
         drawCanvas();
     }
 }
 
 
 
-function onPlaceEl(ev) {
+function onMouseUp(ev) {
+    ev.preventDefault()
     gIsDrag = false;
     gSelectedLine = false;
 }
@@ -219,7 +216,7 @@ function onPlaceEl(ev) {
 
 
 function onSaveMeme() {
-    return
+    // return
     addSavedMeme()
     saveToStorage(SAVED_KEY, gSavedMemes)
 }
@@ -245,3 +242,14 @@ function onDownloadMeme(elLink) {
     elLink.download = 'my-meme.jpg'
 
 }
+
+
+
+
+
+
+
+// if (offsetX >= line.x - (lineWidth / 2) &&
+// offsetX <= line.x + (lineWidth / 2) &&
+// offsetY >= line.y - (lineHeight) &&
+// offsetY <= line.y) {
